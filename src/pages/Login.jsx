@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Eye, EyeOff, Cpu, Loader } from 'lucide-react'
+import { Eye, EyeOff, Loader } from 'lucide-react'
 
 export default function Login({ toast }) {
   const [email, setEmail] = useState('')
@@ -22,7 +22,7 @@ export default function Login({ toast }) {
       setError(err.message || 'Invalid credentials. Try the demo accounts below.')
       return
     }
-    toast?.({ title: 'Welcome back', description: 'Your OS is loading...', type: 'success' })
+    toast?.({ title: 'Welcome back', description: 'Loading your dashboard...', type: 'success' })
     navigate(role === 'admin' ? '/dashboard' : '/va')
   }
 
@@ -61,20 +61,19 @@ export default function Login({ toast }) {
         className="glass relative z-10 w-full max-w-md mx-4 rounded-2xl p-8 animate-fade-in"
         style={{ border: '1px solid #1E1E2E', boxShadow: '0 32px 80px rgba(0,0,0,0.6)' }}
       >
-        {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
-            <Cpu size={20} className="text-white" />
-          </div>
-          <div className="text-left">
-            <p className="font-bold text-base tracking-tight" style={{ color: '#F8F8FF' }}>Kevin OS</p>
-            <p className="text-xs" style={{ color: '#6B7280' }}>Personal Operating System</p>
-          </div>
+        {/* Icon mark only */}
+        <div className="flex justify-center mb-8">
+          <div
+            style={{
+              width: '48px', height: '48px', borderRadius: '14px',
+              background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+              boxShadow: '0 0 32px rgba(99,102,241,0.35)',
+            }}
+          />
         </div>
 
         <h2 className="text-xl font-semibold text-center mb-1" style={{ color: '#F8F8FF' }}>Welcome back</h2>
-        <p className="text-sm text-center mb-6" style={{ color: '#6B7280' }}>Sign in to your command center</p>
+        <p className="text-sm text-center mb-6" style={{ color: '#6B7280' }}>Sign in to your dashboard</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -83,7 +82,7 @@ export default function Login({ toast }) {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="kevin@kevinos.com"
+              placeholder="kevin@example.com"
               required
               className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
               style={{ background: '#16161F', border: '1px solid #1E1E2E', color: '#F8F8FF' }}

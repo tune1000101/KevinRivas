@@ -2,49 +2,50 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard, Calendar, CheckSquare, Scissors, Users, Tag,
   TrendingUp, Briefcase, FileText, Phone, MessageSquare, Bell,
-  DollarSign, BookOpen, Zap, Settings, UserCheck, LogOut, Cpu,
+  DollarSign, BookOpen, Zap, Settings, UserCheck, LogOut,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { useSidebar } from '../context/SidebarContext'
 
 const sections = [
   {
     label: 'Main',
     items: [
       { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-      { to: '/calendar', icon: Calendar, label: 'Calendar', badge: 'Sync' },
-      { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
+      { to: '/calendar',  icon: Calendar,         label: 'Calendar',  badge: 'Sync'   },
+      { to: '/tasks',     icon: CheckSquare,       label: 'Tasks'                      },
     ],
   },
   {
     label: 'Barbershop',
     items: [
       { to: '/bookings', icon: Scissors, label: 'Bookings', badge: 'Square' },
-      { to: '/staff', icon: Users, label: 'Staff' },
-      { to: '/services', icon: Tag, label: 'Services' },
+      { to: '/staff',    icon: Users,    label: 'Staff'                      },
+      { to: '/services', icon: Tag,      label: 'Services'                   },
     ],
   },
   {
     label: 'Mortgage',
     items: [
-      { to: '/pipeline', icon: TrendingUp, label: 'Pipeline' },
-      { to: '/clients', icon: Briefcase, label: 'Clients' },
-      { to: '/documents', icon: FileText, label: 'Documents' },
+      { to: '/pipeline',  icon: TrendingUp, label: 'Pipeline'  },
+      { to: '/clients',   icon: Briefcase,  label: 'Clients'   },
+      { to: '/documents', icon: FileText,   label: 'Documents' },
     ],
   },
   {
     label: 'Communications',
     items: [
-      { to: '/phone', icon: Phone, label: 'Phone', badge: 'Dialpad' },
-      { to: '/messages', icon: MessageSquare, label: 'Messages' },
-      { to: '/notifications', icon: Bell, label: 'Notifications' },
+      { to: '/phone',         icon: Phone,         label: 'Phone',         badge: 'Dialpad' },
+      { to: '/messages',      icon: MessageSquare, label: 'Messages'                        },
+      { to: '/notifications', icon: Bell,          label: 'Notifications'                   },
     ],
   },
   {
     label: 'Business',
     items: [
-      { to: '/financial', icon: DollarSign, label: 'Financial Tracker' },
-      { to: '/sop', icon: BookOpen, label: 'SOP Library' },
-      { to: '/automations', icon: Zap, label: 'Automations', badge: 'Zapier' },
+      { to: '/financial',   icon: DollarSign, label: 'Financial Tracker'              },
+      { to: '/sop',         icon: BookOpen,   label: 'SOP Library'                    },
+      { to: '/automations', icon: Zap,        label: 'Automations', badge: 'Zapier'   },
     ],
   },
 ]
@@ -53,8 +54,8 @@ const adminSections = [
   {
     label: 'Admin',
     items: [
-      { to: '/settings', icon: Settings, label: 'Settings' },
-      { to: '/va-management', icon: UserCheck, label: 'VA Management' },
+      { to: '/settings',      icon: Settings,   label: 'Settings'      },
+      { to: '/va-management', icon: UserCheck,  label: 'VA Management' },
     ],
   },
 ]
@@ -65,25 +66,22 @@ function NavItem({ to, icon: Icon, label, badge }) {
       to={to}
       className={({ isActive }) =>
         `flex items-center gap-3 rounded-lg text-sm font-medium transition-all duration-150 relative
-        ${isActive
-          ? 'nav-active text-white bg-indigo-500/10'
-          : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
-        }`
+        ${isActive ? 'nav-active text-white bg-indigo-500/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'}`
       }
       style={{ padding: '10px 12px', lineHeight: '1.5' }}
     >
       <Icon size={16} className="flex-shrink-0" />
-      <span className="flex-1">{label}</span>
+      <span className="flex-1 truncate">{label}</span>
       {badge && (
-        <span
-          className="font-medium rounded"
-          style={{
-            background: 'rgba(99,102,241,0.15)',
-            color: '#6366F1',
-            fontSize: '10px',
-            padding: '2px 6px',
-          }}
-        >
+        <span style={{
+          background: 'rgba(99,102,241,0.15)',
+          color: '#6366F1',
+          fontSize: '10px',
+          padding: '2px 6px',
+          borderRadius: '4px',
+          fontWeight: 500,
+          flexShrink: 0,
+        }}>
           {badge}
         </span>
       )}
@@ -93,6 +91,7 @@ function NavItem({ to, icon: Icon, label, badge }) {
 
 export default function Sidebar() {
   const { user, profile, role, signOut } = useAuth()
+  const { open } = useSidebar()
   const navigate = useNavigate()
   const name = profile?.name || user?.name || user?.email?.split('@')[0] || 'Kevin'
   const allSections = role === 'admin' ? [...sections, ...adminSections] : sections
@@ -109,79 +108,42 @@ export default function Sidebar() {
         width: '240px',
         background: '#0D0D14',
         borderRight: '1px solid #1E1E2E',
+        transform: open ? 'translateX(0)' : 'translateX(-100%)',
+        transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+        willChange: 'transform',
       }}
     >
-      {/* Logo — 24px padding all around */}
-      <div
-        className="flex items-center gap-3 flex-shrink-0"
-        style={{ padding: '24px', borderBottom: '1px solid #1E1E2E' }}
-      >
-        <div
-          className="flex items-center justify-center flex-shrink-0"
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '8px',
-            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
-          }}
-        >
-          <Cpu size={16} className="text-white" />
-        </div>
-        <div>
-          <p className="font-bold text-sm tracking-tight" style={{ color: '#F8F8FF', lineHeight: '1.5' }}>Kevin OS</p>
-          <p className="text-xs" style={{ color: '#6B7280', lineHeight: '1.5' }}>Personal Operating System</p>
-        </div>
-      </div>
-
-      {/* Nav — scrollable */}
+      {/* Nav — scrollable, starts from top with 16px padding */}
       <nav className="flex-1 overflow-y-auto" style={{ padding: '16px 12px' }}>
         {allSections.map((section, si) => (
           <div key={section.label} style={{ marginTop: si === 0 ? 0 : '24px' }}>
-            <p
-              className="font-semibold uppercase tracking-widest"
-              style={{
-                color: '#374151',
-                fontSize: '10px',
-                lineHeight: '1.5',
-                padding: '0 12px',
-                marginBottom: '8px',
-              }}
-            >
+            <p style={{
+              color: '#374151',
+              fontSize: '10px',
+              fontWeight: 600,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              lineHeight: '1.5',
+              padding: '0 12px',
+              marginBottom: '8px',
+            }}>
               {section.label}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              {section.items.map(item => (
-                <NavItem key={item.to} {...item} />
-              ))}
+              {section.items.map(item => <NavItem key={item.to} {...item} />)}
             </div>
           </div>
         ))}
       </nav>
 
-      {/* User footer — 16px padding, clear border top */}
-      <div
-        className="flex-shrink-0"
-        style={{ borderTop: '1px solid #1E1E2E', padding: '16px 12px' }}
-      >
-        <div
-          className="flex items-center gap-3"
-          style={{
-            background: '#111118',
-            borderRadius: '10px',
-            padding: '12px',
-          }}
-        >
-          <div
-            className="flex items-center justify-center flex-shrink-0 font-semibold"
-            style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
-              color: '#fff',
-              fontSize: '14px',
-            }}
-          >
+      {/* User footer */}
+      <div className="flex-shrink-0" style={{ borderTop: '1px solid #1E1E2E', padding: '16px 12px' }}>
+        <div className="flex items-center gap-3" style={{ background: '#111118', borderRadius: '10px', padding: '12px' }}>
+          <div className="flex items-center justify-center flex-shrink-0 font-semibold" style={{
+            width: '32px', height: '32px', borderRadius: '50%',
+            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+            color: '#fff', fontSize: '14px',
+          }}>
             {name.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
@@ -190,7 +152,7 @@ export default function Sidebar() {
           </div>
           <button
             onClick={handleSignOut}
-            className="transition-opacity hover:opacity-70 flex-shrink-0"
+            className="flex-shrink-0 transition-opacity hover:opacity-70"
             style={{ color: '#6B7280', padding: '4px' }}
             title="Sign out"
           >
