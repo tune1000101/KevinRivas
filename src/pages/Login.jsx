@@ -27,8 +27,8 @@ export default function Login({ toast }) {
   }
 
   function fillDemo(type) {
-    if (type === 'admin') { setEmail('kevin@kevinOS.com'); setPassword('kevin123') }
-    else { setEmail('va@kevinOS.com'); setPassword('va123') }
+    if (type === 'admin') { setEmail('kevin@kevinos.com'); setPassword('kevin123') }
+    else { setEmail('va@kevinos.com'); setPassword('va123') }
   }
 
   return (
@@ -83,7 +83,7 @@ export default function Login({ toast }) {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="kevin@kevinOS.com"
+              placeholder="kevin@kevinos.com"
               required
               className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
               style={{ background: '#16161F', border: '1px solid #1E1E2E', color: '#F8F8FF' }}

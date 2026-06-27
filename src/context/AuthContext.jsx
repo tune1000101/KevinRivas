@@ -1,12 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase, supabaseConfigured } from '../lib/supabase'
 
 const AuthContext = createContext(null)
 
-// Demo users for local dev without Supabase credentials
 const DEMO_USERS = {
-  'kevin@kevinOS.com': { password: 'kevin123', role: 'admin', name: 'Kevin Rivas' },
-  'va@kevinOS.com': { password: 'va123', role: 'va', name: 'Jordan VA' },
+  'kevin@kevinos.com': { password: 'kevin123', role: 'admin', name: 'Kevin Rivas' },
+  'va@kevinos.com': { password: 'va123', role: 'va', name: 'Jordan VA' },
 }
 
 export function AuthProvider({ children }) {
@@ -15,21 +14,26 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Check persisted demo session
+    // Restore persisted demo session immediately
     const saved = sessionStorage.getItem('kevin-os-user')
     if (saved) {
-      const parsed = JSON.parse(saved)
-      setUser(parsed)
-      setProfile(parsed)
+      try {
+        const parsed = JSON.parse(saved)
+        setUser(parsed)
+        setProfile(parsed)
+      } catch (_) {}
     }
     setLoading(false)
+
+    // Only touch Supabase when real credentials exist
+    if (!supabaseConfigured) return
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         setUser(session.user)
         fetchProfile(session.user.id)
       }
-    })
+    }).catch(() => {})
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
@@ -52,27 +56,40 @@ export function AuthProvider({ children }) {
   }
 
   async function signIn(email, password) {
-    // Demo mode
-    const demo = DEMO_USERS[email.toLowerCase()]
+    const normalised = email.toLowerCase().trim()
+
+    // Demo mode — always checked first
+    const demo = DEMO_USERS[normalised]
     if (demo && demo.password === password) {
-      const demoUser = { id: 'demo-' + demo.role, email, role: demo.role, name: demo.name, isDemo: true }
+      const demoUser = { id: 'demo-' + demo.role, email: normalised, role: demo.role, name: demo.name, isDemo: true }
       sessionStorage.setItem('kevin-os-user', JSON.stringify(demoUser))
       setUser(demoUser)
       setProfile(demoUser)
       return { error: null, role: demo.role }
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) return { error }
-    await fetchProfile(data.user.id)
-    return { error: null, role: profile?.role || 'va' }
+    // Real Supabase auth — only when configured
+    if (!supabaseConfigured) {
+      return { error: { message: 'No Supabase credentials. Use the demo accounts below.' } }
+    }
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ email: normalised, password })
+      if (error) return { error }
+      await fetchProfile(data.user.id)
+      return { error: null, role: profile?.role || 'va' }
+    } catch (_) {
+      return { error: { message: 'Connection failed. Use the demo accounts below.' } }
+    }
   }
 
   async function signOut() {
     sessionStorage.removeItem('kevin-os-user')
     setUser(null)
     setProfile(null)
-    await supabase.auth.signOut()
+    if (supabaseConfigured) {
+      await supabase.auth.signOut().catch(() => {})
+    }
   }
 
   const role = profile?.role || user?.role || 'va'
