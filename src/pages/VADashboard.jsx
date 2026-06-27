@@ -33,7 +33,7 @@ export default function VADashboard({ toast }) {
   return (
     <div className="flex flex-col" style={{ height: '100vh', overflow: 'hidden' }}>
       <Header breadcrumbs={['VA Dashboard']} />
-        <main className="flex-1 overflow-y-auto px-8 py-6">
+        <main className="flex-1 overflow-y-auto" style={{ padding: '16px' }}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             {/* Kevin's Schedule */}

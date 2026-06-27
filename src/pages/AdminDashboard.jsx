@@ -4,8 +4,10 @@ import StatCard from '../components/StatCard'
 import AnalyticsChart from '../components/AnalyticsChart'
 import TaskList from '../components/TaskList'
 import ActivityFeed from '../components/ActivityFeed'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 export default function AdminDashboard({ toast }) {
+  const isMobile = useIsMobile()
   const stats = [
     { icon: Scissors,      label: "Today's Appointments", value: '8',      change: 14,  changeLabel: '+2 vs yesterday',    color: '#6366F1' },
     { icon: CheckSquare,   label: 'Pending Tasks',         value: '12',     change: -5,  changeLabel: '3 high priority',    color: '#F59E0B' },
@@ -19,15 +21,15 @@ export default function AdminDashboard({ toast }) {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Scrollable main content */}
-        <main className="flex-1 overflow-y-auto" style={{ padding: '32px 32px 32px 32px' }}>
+        <main className="flex-1 overflow-y-auto" style={{ padding: isMobile ? '16px' : '32px' }}>
 
-          {/* Stat cards — 4-column equal grid, 16px gap */}
+          {/* Stat cards — 4-col desktop, 2-col mobile */}
           <section>
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: '16px',
+                gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+                gap: '12px',
               }}
             >
               {stats.map((s, i) => <StatCard key={i} {...s} />)}
@@ -74,19 +76,21 @@ export default function AdminDashboard({ toast }) {
                 <p style={{ color: '#6B7280', fontSize: '12px', marginTop: '2px' }}>4 remaining this week</p>
               </div>
               <div className="flex items-center" style={{ gap: '8px' }}>
-                <span
-                  style={{
-                    background: '#0D0D14',
-                    color: '#6B7280',
-                    border: '1px solid #1E1E2E',
-                    borderRadius: '8px',
-                    fontSize: '11px',
-                    padding: '6px 12px',
-                    lineHeight: '1.5',
-                  }}
-                >
-                  This Week
-                </span>
+                {!isMobile && (
+                  <span
+                    style={{
+                      background: '#0D0D14',
+                      color: '#6B7280',
+                      border: '1px solid #1E1E2E',
+                      borderRadius: '8px',
+                      fontSize: '11px',
+                      padding: '6px 12px',
+                      lineHeight: '1.5',
+                    }}
+                  >
+                    This Week
+                  </span>
+                )}
                 <button
                   onClick={() => toast?.({ title: 'New Task', description: 'Task creation coming soon', type: 'info' })}
                   className="flex items-center font-medium transition-all hover:opacity-80"

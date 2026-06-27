@@ -2,8 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import { useAuth, AuthProvider } from './context/AuthContext'
 import { SidebarProvider, useSidebar } from './context/SidebarContext'
 import { useToast } from './hooks/useToast'
+import { useIsMobile } from './hooks/useIsMobile'
 import Toast from './components/Toast'
 import Sidebar from './components/Sidebar'
+import MobileNav from './components/MobileNav'
 
 import Login from './pages/Login'
 import AdminDashboard from './pages/AdminDashboard'
@@ -31,24 +33,44 @@ function LoadingScreen() {
 
 function SidebarLayout({ toast }) {
   const { user, loading } = useAuth()
-  const { open } = useSidebar()
+  const { open, close } = useSidebar()
+  const isMobile = useIsMobile()
 
   if (loading) return <LoadingScreen />
   if (!user) return <Navigate to="/login" replace />
 
   return (
     <div className="flex min-h-screen" style={{ background: '#0A0A0F' }}>
+      {/* Backdrop overlay on mobile when sidebar is open */}
+      {isMobile && open && (
+        <div
+          onClick={close}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 45,
+            background: 'rgba(0,0,0,0.6)',
+            backdropFilter: 'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)',
+          }}
+        />
+      )}
+
       <Sidebar />
-      {/* Content shifts with the sidebar — smooth transition matches sidebar */}
+
+      {/* Content shifts with the sidebar on desktop; full-width on mobile */}
       <div
         className="flex-1 min-w-0"
         style={{
-          marginLeft: open ? '240px' : '0',
+          marginLeft: !isMobile && open ? '240px' : '0',
           transition: 'margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+          paddingBottom: isMobile ? 'calc(60px + env(safe-area-inset-bottom, 0px))' : '0',
         }}
       >
         <Outlet context={{ toast }} />
       </div>
+
+      {isMobile && <MobileNav />}
     </div>
   )
 }
