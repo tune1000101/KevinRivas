@@ -22,38 +22,59 @@ export default function Header({ breadcrumbs = [] }) {
 
   return (
     <header
-      className="flex items-center justify-between px-8 py-4 sticky top-0 z-30"
-      style={{ background: 'rgba(10,10,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid #1E1E2E' }}
+      className="flex items-center justify-between flex-shrink-0 sticky top-0 z-30"
+      style={{
+        height: '64px',
+        paddingLeft: '32px',
+        paddingRight: '24px',
+        background: 'rgba(10,10,15,0.90)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderBottom: '1px solid #1E1E2E',
+      }}
     >
-      {/* Left: greeting + breadcrumb */}
-      <div>
-        <div className="flex items-center gap-2 text-xs mb-0.5" style={{ color: '#6B7280' }}>
+      {/* Left: breadcrumb + greeting */}
+      <div style={{ lineHeight: '1.5' }}>
+        <div className="flex items-center gap-2" style={{ color: '#6B7280', fontSize: '11px', marginBottom: '2px' }}>
           <span>Kevin OS</span>
           {breadcrumbs.map((b, i) => (
             <span key={i} className="flex items-center gap-2">
-              <ChevronRight size={12} />
+              <ChevronRight size={11} />
               <span style={{ color: i === breadcrumbs.length - 1 ? '#F8F8FF' : '#6B7280' }}>{b}</span>
             </span>
           ))}
         </div>
-        <h1 className="text-lg font-semibold" style={{ color: '#F8F8FF' }}>
-          {greeting}, {name.split(' ')[0]} <span className="text-sm font-normal" style={{ color: '#6B7280' }}>— {dateStr} · {timeStr}</span>
+        <h1
+          className="font-semibold"
+          style={{ color: '#F8F8FF', fontSize: '15px', lineHeight: '1.5' }}
+        >
+          {greeting}, {name.split(' ')[0]}
+          <span className="font-normal" style={{ color: '#6B7280', fontSize: '13px' }}>
+            {' '}— {dateStr} · {timeStr}
+          </span>
         </h1>
       </div>
 
-      {/* Right: search + bell + avatar */}
-      <div className="flex items-center gap-3">
+      {/* Right: search + bell + avatar — 24px right padding handled by parent */}
+      <div className="flex items-center" style={{ gap: '12px' }}>
         <div className="relative hidden md:flex items-center">
-          <Search size={14} className="absolute left-3" style={{ color: '#6B7280' }} />
+          <Search size={14} className="absolute" style={{ color: '#6B7280', left: '12px' }} />
           <input
             type="text"
             placeholder="Search anything..."
-            className="pl-9 pr-4 py-2 text-sm rounded-lg outline-none transition-all"
+            className="outline-none transition-all"
             style={{
               background: '#111118',
               border: '1px solid #1E1E2E',
+              borderRadius: '8px',
               color: '#F8F8FF',
-              width: '220px',
+              fontSize: '13px',
+              lineHeight: '1.5',
+              paddingTop: '8px',
+              paddingBottom: '8px',
+              paddingLeft: '36px',
+              paddingRight: '16px',
+              width: '280px',
             }}
             onFocus={e => e.target.style.borderColor = '#6366F1'}
             onBlur={e => e.target.style.borderColor = '#1E1E2E'}
@@ -61,19 +82,40 @@ export default function Header({ breadcrumbs = [] }) {
         </div>
 
         <button
-          className="relative w-9 h-9 flex items-center justify-center rounded-lg transition-all hover:bg-white/5"
-          style={{ border: '1px solid #1E1E2E' }}
+          className="relative flex items-center justify-center transition-all hover:bg-white/5"
+          style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '8px',
+            border: '1px solid #1E1E2E',
+            flexShrink: 0,
+          }}
         >
           <Bell size={16} style={{ color: '#6B7280' }} />
           <span
-            className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
-            style={{ background: '#6366F1', boxShadow: '0 0 6px rgba(99,102,241,0.8)' }}
+            className="absolute"
+            style={{
+              top: '6px',
+              right: '6px',
+              width: '7px',
+              height: '7px',
+              borderRadius: '50%',
+              background: '#6366F1',
+              boxShadow: '0 0 6px rgba(99,102,241,0.8)',
+            }}
           />
         </button>
 
         <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold cursor-pointer"
-          style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)', color: '#fff' }}
+          className="flex items-center justify-center font-semibold cursor-pointer flex-shrink-0"
+          style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+            color: '#fff',
+            fontSize: '14px',
+          }}
         >
           {name.charAt(0).toUpperCase()}
         </div>

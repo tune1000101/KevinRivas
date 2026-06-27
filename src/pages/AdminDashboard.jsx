@@ -7,10 +7,10 @@ import ActivityFeed from '../components/ActivityFeed'
 
 export default function AdminDashboard({ toast }) {
   const stats = [
-    { icon: Scissors, label: "Today's Appointments", value: '8', change: 14, changeLabel: '+2 vs yesterday', color: '#6366F1' },
-    { icon: CheckSquare, label: 'Pending Tasks', value: '12', change: -5, changeLabel: '3 high priority', color: '#F59E0B' },
-    { icon: MessageSquare, label: 'Unread Messages', value: '5', change: 8, changeLabel: 'Across all channels', color: '#10B981' },
-    { icon: DollarSign, label: 'Monthly Revenue', value: '$18.4K', change: 4.2, changeLabel: '+$740 vs last month', color: '#8B5CF6' },
+    { icon: Scissors,      label: "Today's Appointments", value: '8',      change: 14,  changeLabel: '+2 vs yesterday',    color: '#6366F1' },
+    { icon: CheckSquare,   label: 'Pending Tasks',         value: '12',     change: -5,  changeLabel: '3 high priority',    color: '#F59E0B' },
+    { icon: MessageSquare, label: 'Unread Messages',       value: '5',      change: 8,   changeLabel: 'Across all channels', color: '#10B981' },
+    { icon: DollarSign,    label: 'Monthly Revenue',       value: '$18.4K', change: 4.2, changeLabel: '+$740 vs last month', color: '#8B5CF6' },
   ]
 
   return (
@@ -18,45 +18,89 @@ export default function AdminDashboard({ toast }) {
       <Header breadcrumbs={['Dashboard']} />
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Scrollable center */}
-        <main className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
+        {/* Scrollable main content */}
+        <main className="flex-1 overflow-y-auto" style={{ padding: '32px 32px 32px 32px' }}>
 
-          {/* Stat cards */}
+          {/* Stat cards — 4-column equal grid, 16px gap */}
           <section>
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '16px',
+              }}
+            >
               {stats.map((s, i) => <StatCard key={i} {...s} />)}
             </div>
           </section>
 
-          {/* Analytics */}
-          <section className="rounded-xl p-6" style={{ background: '#111118', border: '1px solid #1E1E2E' }}>
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-sm font-semibold" style={{ color: '#F8F8FF' }}>Analytics</h2>
-                <p className="text-xs mt-0.5" style={{ color: '#6B7280' }}>Weekly performance overview</p>
+          {/* Analytics — 24px gap from stat cards */}
+          <section
+            className="rounded-xl"
+            style={{
+              background: '#111118',
+              border: '1px solid #1E1E2E',
+              padding: '24px',
+              marginTop: '24px',
+            }}
+          >
+            <div className="flex items-center justify-between" style={{ marginBottom: '20px' }}>
+              <div style={{ lineHeight: '1.5' }}>
+                <h2 className="font-semibold" style={{ color: '#F8F8FF', fontSize: '14px' }}>Analytics</h2>
+                <p style={{ color: '#6B7280', fontSize: '12px', marginTop: '2px' }}>Weekly performance overview</p>
               </div>
-              <span className="text-xs px-3 py-1 rounded-full" style={{ background: '#16161F', color: '#6B7280', border: '1px solid #1E1E2E' }}>
+              <span
+                style={{
+                  background: '#16161F',
+                  color: '#6B7280',
+                  border: '1px solid #1E1E2E',
+                  borderRadius: '999px',
+                  fontSize: '11px',
+                  padding: '4px 12px',
+                  lineHeight: '1.5',
+                }}
+              >
                 20–26 Jun
               </span>
             </div>
             <AnalyticsChart />
           </section>
 
-          {/* Active Tasks */}
-          <section>
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <h2 className="text-sm font-semibold" style={{ color: '#F8F8FF' }}>Active Tasks</h2>
-                <p className="text-xs mt-0.5" style={{ color: '#6B7280' }}>4 remaining this week</p>
+          {/* Active Tasks — 24px gap from analytics */}
+          <section style={{ marginTop: '24px' }}>
+            <div className="flex items-center justify-between" style={{ marginBottom: '16px' }}>
+              <div style={{ lineHeight: '1.5' }}>
+                <h2 className="font-semibold" style={{ color: '#F8F8FF', fontSize: '14px' }}>Active Tasks</h2>
+                <p style={{ color: '#6B7280', fontSize: '12px', marginTop: '2px' }}>4 remaining this week</p>
               </div>
-              <div className="flex gap-2">
-                <span className="text-xs px-3 py-1.5 rounded-lg" style={{ background: '#111118', color: '#6B7280', border: '1px solid #1E1E2E' }}>
+              <div className="flex items-center" style={{ gap: '8px' }}>
+                <span
+                  style={{
+                    background: '#0D0D14',
+                    color: '#6B7280',
+                    border: '1px solid #1E1E2E',
+                    borderRadius: '8px',
+                    fontSize: '11px',
+                    padding: '6px 12px',
+                    lineHeight: '1.5',
+                  }}
+                >
                   This Week
                 </span>
                 <button
                   onClick={() => toast?.({ title: 'New Task', description: 'Task creation coming soon', type: 'info' })}
-                  className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg font-medium transition-all hover:opacity-80"
-                  style={{ background: 'rgba(99,102,241,0.2)', color: '#6366F1', border: '1px solid rgba(99,102,241,0.3)' }}
+                  className="flex items-center font-medium transition-all hover:opacity-80"
+                  style={{
+                    background: 'rgba(99,102,241,0.2)',
+                    color: '#6366F1',
+                    border: '1px solid rgba(99,102,241,0.3)',
+                    borderRadius: '8px',
+                    fontSize: '11px',
+                    padding: '6px 12px',
+                    lineHeight: '1.5',
+                    gap: '6px',
+                    cursor: 'pointer',
+                  }}
                 >
                   <Plus size={13} /> Add Task
                 </button>
@@ -64,12 +108,19 @@ export default function AdminDashboard({ toast }) {
             </div>
             <TaskList />
           </section>
+
+          {/* Bottom breathing room */}
+          <div style={{ height: '32px' }} />
         </main>
 
-        {/* Right sidebar — activity feed */}
+        {/* Right sidebar — activity feed, exactly 280px */}
         <aside
-          className="hidden xl:flex flex-col overflow-y-auto"
-          style={{ width: '300px', background: '#0D0D14', borderLeft: '1px solid #1E1E2E' }}
+          className="hidden xl:flex flex-col flex-shrink-0 overflow-hidden"
+          style={{
+            width: '280px',
+            background: '#0D0D14',
+            borderLeft: '1px solid #1E1E2E',
+          }}
         >
           <ActivityFeed profileName="Kevin Rivas" profileRole="Admin" />
         </aside>

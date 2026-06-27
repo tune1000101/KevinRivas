@@ -31,7 +31,7 @@ function SidebarLayout({ toast }) {
   return (
     <div className="flex min-h-screen" style={{ background: '#0A0A0F' }}>
       <Sidebar />
-      <div className="flex-1 min-w-0" style={{ marginLeft: '260px' }}>
+      <div className="flex-1 min-w-0" style={{ marginLeft: '240px' }}>
         <Outlet context={{ toast }} />
       </div>
     </div>

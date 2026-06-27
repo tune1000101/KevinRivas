@@ -64,18 +64,26 @@ function NavItem({ to, icon: Icon, label, badge }) {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-150 group relative
+        `flex items-center gap-3 rounded-lg text-sm font-medium transition-all duration-150 relative
         ${isActive
           ? 'nav-active text-white bg-indigo-500/10'
           : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
         }`
       }
+      style={{ padding: '10px 12px', lineHeight: '1.5' }}
     >
       <Icon size={16} className="flex-shrink-0" />
       <span className="flex-1">{label}</span>
       {badge && (
-        <span className="text-xs px-1.5 py-0.5 rounded font-medium"
-          style={{ background: 'rgba(99,102,241,0.15)', color: '#6366F1', fontSize: '10px' }}>
+        <span
+          className="font-medium rounded"
+          style={{
+            background: 'rgba(99,102,241,0.15)',
+            color: '#6366F1',
+            fontSize: '10px',
+            padding: '2px 6px',
+          }}
+        >
           {badge}
         </span>
       )}
@@ -96,30 +104,52 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="fixed left-0 top-0 h-screen flex flex-col z-40"
-      style={{ width: '260px', background: '#0D0D14', borderRight: '1px solid #1E1E2E' }}
+      className="fixed left-0 top-0 h-screen flex flex-col z-40 flex-shrink-0"
+      style={{
+        width: '240px',
+        background: '#0D0D14',
+        borderRight: '1px solid #1E1E2E',
+      }}
     >
-      {/* Logo */}
-      <div className="flex items-center gap-3 px-5 py-5" style={{ borderBottom: '1px solid #1E1E2E' }}>
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-          style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)' }}>
+      {/* Logo — 24px padding all around */}
+      <div
+        className="flex items-center gap-3 flex-shrink-0"
+        style={{ padding: '24px', borderBottom: '1px solid #1E1E2E' }}
+      >
+        <div
+          className="flex items-center justify-center flex-shrink-0"
+          style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '8px',
+            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+          }}
+        >
           <Cpu size={16} className="text-white" />
         </div>
         <div>
-          <span className="font-bold text-sm tracking-tight" style={{ color: '#F8F8FF' }}>Kevin OS</span>
-          <p className="text-xs" style={{ color: '#6B7280' }}>Personal Operating System</p>
+          <p className="font-bold text-sm tracking-tight" style={{ color: '#F8F8FF', lineHeight: '1.5' }}>Kevin OS</p>
+          <p className="text-xs" style={{ color: '#6B7280', lineHeight: '1.5' }}>Personal Operating System</p>
         </div>
       </div>
 
-      {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
-        {allSections.map(section => (
-          <div key={section.label}>
-            <p className="px-3 mb-1.5 text-xs font-semibold uppercase tracking-widest"
-              style={{ color: '#374151' }}>
+      {/* Nav — scrollable */}
+      <nav className="flex-1 overflow-y-auto" style={{ padding: '16px 12px' }}>
+        {allSections.map((section, si) => (
+          <div key={section.label} style={{ marginTop: si === 0 ? 0 : '24px' }}>
+            <p
+              className="font-semibold uppercase tracking-widest"
+              style={{
+                color: '#374151',
+                fontSize: '10px',
+                lineHeight: '1.5',
+                padding: '0 12px',
+                marginBottom: '8px',
+              }}
+            >
               {section.label}
             </p>
-            <div className="space-y-0.5">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               {section.items.map(item => (
                 <NavItem key={item.to} {...item} />
               ))}
@@ -128,21 +158,40 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* User footer */}
-      <div className="px-3 pb-4" style={{ borderTop: '1px solid #1E1E2E', paddingTop: '12px' }}>
-        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg" style={{ background: '#111118' }}>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0"
-            style={{ background: 'linear-gradient(135deg, #6366F1, #8B5CF6)', color: '#fff' }}>
+      {/* User footer — 16px padding, clear border top */}
+      <div
+        className="flex-shrink-0"
+        style={{ borderTop: '1px solid #1E1E2E', padding: '16px 12px' }}
+      >
+        <div
+          className="flex items-center gap-3"
+          style={{
+            background: '#111118',
+            borderRadius: '10px',
+            padding: '12px',
+          }}
+        >
+          <div
+            className="flex items-center justify-center flex-shrink-0 font-semibold"
+            style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+              color: '#fff',
+              fontSize: '14px',
+            }}
+          >
             {name.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate" style={{ color: '#F8F8FF' }}>{name}</p>
-            <p className="text-xs capitalize" style={{ color: '#6B7280' }}>{role}</p>
+            <p className="text-sm font-medium truncate" style={{ color: '#F8F8FF', lineHeight: '1.5' }}>{name}</p>
+            <p className="text-xs capitalize" style={{ color: '#6B7280', lineHeight: '1.5' }}>{role}</p>
           </div>
           <button
             onClick={handleSignOut}
-            className="transition-opacity hover:opacity-70 p-1 rounded"
-            style={{ color: '#6B7280' }}
+            className="transition-opacity hover:opacity-70 flex-shrink-0"
+            style={{ color: '#6B7280', padding: '4px' }}
             title="Sign out"
           >
             <LogOut size={15} />
