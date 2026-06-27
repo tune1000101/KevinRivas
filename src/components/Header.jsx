@@ -107,7 +107,7 @@ export default function Header({ breadcrumbs = [] }) {
                 paddingRight: '16px',
                 width: '280px',
               }}
-              onFocus={e => e.target.style.borderColor = '#6366F1'}
+              onFocus={e => e.target.style.borderColor = '#C9A227'}
               onBlur={e => e.target.style.borderColor = '#1E1E2E'}
             />
           </div>
@@ -128,8 +128,8 @@ export default function Header({ breadcrumbs = [] }) {
             right: isMobile ? '8px' : '6px',
             width: '7px', height: '7px',
             borderRadius: '50%',
-            background: '#6366F1',
-            boxShadow: '0 0 6px rgba(99,102,241,0.8)',
+            background: '#C9A227',
+            boxShadow: '0 0 6px rgba(201,162,39,0.8)',
           }} />
         </button>
 
@@ -139,7 +139,7 @@ export default function Header({ breadcrumbs = [] }) {
             width: isMobile ? '36px' : '36px',
             height: isMobile ? '36px' : '36px',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+            background: 'linear-gradient(135deg, #C9A227, #A8891F)',
             color: '#fff',
             fontSize: '14px',
           }}

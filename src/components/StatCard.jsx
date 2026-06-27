@@ -1,6 +1,6 @@
 import { TrendingUp, TrendingDown } from 'lucide-react'
 
-export default function StatCard({ icon: Icon, label, value, change, changeLabel, color = '#6366F1', loading = false }) {
+export default function StatCard({ icon: Icon, label, value, change, changeLabel, color = '#C9A227', loading = false }) {
   if (loading) {
     return (
       <div

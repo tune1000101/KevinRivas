@@ -25,7 +25,7 @@ const activityLog = [
 
 const typeColors = {
   Barbershop: { color: '#06B6D4', bg: 'rgba(6,182,212,0.1)' },
-  Mortgage: { color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)' },
+  Mortgage: { color: '#C9A227', bg: 'rgba(201,162,39,0.1)' },
   Personal: { color: '#6B7280', bg: 'rgba(107,114,128,0.1)' },
 }
 
@@ -39,7 +39,7 @@ export default function VADashboard({ toast }) {
             {/* Kevin's Schedule */}
             <div className="lg:col-span-2 rounded-xl p-6" style={{ background: '#111118', border: '1px solid #1E1E2E' }}>
               <div className="flex items-center gap-3 mb-5">
-                <Calendar size={16} style={{ color: '#6366F1' }} />
+                <Calendar size={16} style={{ color: '#C9A227' }} />
                 <h2 className="text-sm font-semibold" style={{ color: '#F8F8FF' }}>Kevin's Schedule — Today</h2>
               </div>
               <div className="space-y-2">
@@ -65,10 +65,10 @@ export default function VADashboard({ toast }) {
               <h2 className="text-sm font-semibold mb-4" style={{ color: '#F8F8FF' }}>Quick Actions</h2>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { icon: Scissors, label: 'Book Appointment', color: '#6366F1' },
+                  { icon: Scissors, label: 'Book Appointment', color: '#C9A227' },
                   { icon: Plus, label: 'Add Task', color: '#10B981' },
                   { icon: Flag, label: 'Flag for Kevin', color: '#F59E0B' },
-                  { icon: MessageSquare, label: 'Send Message', color: '#8B5CF6' },
+                  { icon: MessageSquare, label: 'Send Message', color: '#C9A227' },
                 ].map(action => (
                   <button
                     key={action.label}
@@ -108,14 +108,14 @@ export default function VADashboard({ toast }) {
             {/* Activity Log */}
             <div className="lg:col-span-2 rounded-xl p-6" style={{ background: '#111118', border: '1px solid #1E1E2E' }}>
               <div className="flex items-center gap-3 mb-4">
-                <Clock size={16} style={{ color: '#8B5CF6' }} />
+                <Clock size={16} style={{ color: '#C9A227' }} />
                 <h2 className="text-sm font-semibold" style={{ color: '#F8F8FF' }}>Today's Activity Log</h2>
               </div>
               <div className="space-y-3">
                 {activityLog.map((log, i) => (
                   <div key={i} className="flex items-center gap-4">
                     <span className="text-xs font-mono w-20 flex-shrink-0" style={{ color: '#6B7280' }}>{log.time}</span>
-                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#6366F1' }} />
+                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#C9A227' }} />
                     <span className="text-sm" style={{ color: '#F8F8FF' }}>{log.action}</span>
                   </div>
                 ))}

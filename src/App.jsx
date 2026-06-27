@@ -20,7 +20,7 @@ function LoadingScreen() {
           className="mx-auto mb-4 flex items-center justify-center animate-spin-slow"
           style={{
             width: '40px', height: '40px', borderRadius: '10px',
-            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+            background: 'linear-gradient(135deg, #C9A227, #A8891F)',
           }}
         >
           <span className="text-white font-bold text-sm">K</span>

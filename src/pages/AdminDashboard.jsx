@@ -9,10 +9,10 @@ import { useIsMobile } from '../hooks/useIsMobile'
 export default function AdminDashboard({ toast }) {
   const isMobile = useIsMobile()
   const stats = [
-    { icon: Scissors,      label: "Today's Appointments", value: '8',      change: 14,  changeLabel: '+2 vs yesterday',    color: '#6366F1' },
+    { icon: Scissors,      label: "Today's Appointments", value: '8',      change: 14,  changeLabel: '+2 vs yesterday',    color: '#C9A227' },
     { icon: CheckSquare,   label: 'Pending Tasks',         value: '12',     change: -5,  changeLabel: '3 high priority',    color: '#F59E0B' },
     { icon: MessageSquare, label: 'Unread Messages',       value: '5',      change: 8,   changeLabel: 'Across all channels', color: '#10B981' },
-    { icon: DollarSign,    label: 'Monthly Revenue',       value: '$18.4K', change: 4.2, changeLabel: '+$740 vs last month', color: '#8B5CF6' },
+    { icon: DollarSign,    label: 'Monthly Revenue',       value: '$18.4K', change: 4.2, changeLabel: '+$740 vs last month', color: '#C9A227' },
   ]
 
   return (
@@ -95,9 +95,9 @@ export default function AdminDashboard({ toast }) {
                   onClick={() => toast?.({ title: 'New Task', description: 'Task creation coming soon', type: 'info' })}
                   className="flex items-center font-medium transition-all hover:opacity-80"
                   style={{
-                    background: 'rgba(99,102,241,0.2)',
-                    color: '#6366F1',
-                    border: '1px solid rgba(99,102,241,0.3)',
+                    background: 'rgba(201,162,39,0.2)',
+                    color: '#C9A227',
+                    border: '1px solid rgba(201,162,39,0.3)',
                     borderRadius: '8px',
                     fontSize: '11px',
                     padding: '6px 12px',

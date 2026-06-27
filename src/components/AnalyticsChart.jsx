@@ -66,9 +66,9 @@ export default function AnalyticsChart({ loading = false }) {
             onClick={() => setMode(m)}
             className="font-medium capitalize transition-all"
             style={{
-              background: mode === m ? 'rgba(99,102,241,0.2)' : 'transparent',
-              color: mode === m ? '#6366F1' : '#6B7280',
-              border: `1px solid ${mode === m ? 'rgba(99,102,241,0.4)' : '#1E1E2E'}`,
+              background: mode === m ? 'rgba(201,162,39,0.2)' : 'transparent',
+              color: mode === m ? '#C9A227' : '#6B7280',
+              border: `1px solid ${mode === m ? 'rgba(201,162,39,0.4)' : '#1E1E2E'}`,
               borderRadius: '8px',
               fontSize: '12px',
               lineHeight: '1.5',
@@ -80,7 +80,7 @@ export default function AnalyticsChart({ loading = false }) {
         ))}
         <div className="flex items-center ml-auto" style={{ gap: '16px', fontSize: '11px', color: '#6B7280' }}>
           <span className="flex items-center" style={{ gap: '6px' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#6366F1', display: 'inline-block' }} />
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#C9A227', display: 'inline-block' }} />
             Active
           </span>
           <span className="flex items-center" style={{ gap: '6px' }}>
@@ -96,8 +96,8 @@ export default function AnalyticsChart({ loading = false }) {
           <AreaChart data={data} margin={{ top: 5, right: 5, bottom: 0, left: -20 }}>
             <defs>
               <linearGradient id="activeGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#6366F1" stopOpacity={0.25} />
-                <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
+                <stop offset="5%" stopColor="#C9A227" stopOpacity={0.25} />
+                <stop offset="95%" stopColor="#C9A227" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="passiveGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#374151" stopOpacity={0.4} />
@@ -108,7 +108,7 @@ export default function AnalyticsChart({ loading = false }) {
             <XAxis dataKey="day" tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} />
             <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#1E1E2E' }} />
-            <Area type="monotone" dataKey="active" name="Active" stroke="#6366F1" strokeWidth={2} fill="url(#activeGrad)" dot={false} activeDot={{ r: 4, fill: '#6366F1' }} />
+            <Area type="monotone" dataKey="active" name="Active" stroke="#C9A227" strokeWidth={2} fill="url(#activeGrad)" dot={false} activeDot={{ r: 4, fill: '#C9A227' }} />
             <Area type="monotone" dataKey="passive" name="Passive" stroke="#374151" strokeWidth={2} fill="url(#passiveGrad)" dot={false} activeDot={{ r: 4, fill: '#374151' }} />
           </AreaChart>
         </ResponsiveContainer>

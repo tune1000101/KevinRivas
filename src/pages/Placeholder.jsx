@@ -8,8 +8,8 @@ export default function Placeholder({ title, breadcrumb, description, badge }) {
       <main className="flex-1 overflow-y-auto flex items-center justify-center p-8">
         <div className="text-center max-w-sm animate-fade-in">
           <div className="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center"
-            style={{ background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)' }}>
-            <Construction size={28} style={{ color: '#6366F1' }} />
+            style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)' }}>
+            <Construction size={28} style={{ color: '#C9A227' }} />
           </div>
           <h2 className="text-lg font-semibold mb-2" style={{ color: '#F8F8FF' }}>{title}</h2>
           <p className="text-sm leading-relaxed mb-4" style={{ color: '#6B7280' }}>
@@ -17,7 +17,7 @@ export default function Placeholder({ title, breadcrumb, description, badge }) {
           </p>
           {badge && (
             <span className="inline-block text-xs px-3 py-1.5 rounded-full font-medium"
-              style={{ background: 'rgba(99,102,241,0.15)', color: '#6366F1', border: '1px solid rgba(99,102,241,0.3)' }}>
+              style={{ background: 'rgba(201,162,39,0.15)', color: '#C9A227', border: '1px solid rgba(201,162,39,0.3)' }}>
               Integration: {badge}
             </span>
           )}

@@ -1,15 +1,15 @@
 import { Clock, MoreHorizontal, Circle, Loader, CheckCircle2 } from 'lucide-react'
 
 const statusConfig = {
-  'In Progress': { color: '#6366F1', bg: 'rgba(99,102,241,0.12)', icon: Loader },
+  'In Progress': { color: '#C9A227', bg: 'rgba(201,162,39,0.12)', icon: Loader },
   'Pending':     { color: '#F59E0B', bg: 'rgba(245,158,11,0.12)',  icon: Circle },
   'Done':        { color: '#10B981', bg: 'rgba(16,185,129,0.12)',  icon: CheckCircle2 },
-  'Reviewing':   { color: '#8B5CF6', bg: 'rgba(139,92,246,0.12)', icon: Circle },
+  'Reviewing':   { color: '#C9A227', bg: 'rgba(201,162,39,0.12)', icon: Circle },
 }
 
 const categoryColors = {
   Barbershop: { color: '#06B6D4', bg: 'rgba(6,182,212,0.1)' },
-  Mortgage:   { color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)' },
+  Mortgage:   { color: '#C9A227', bg: 'rgba(201,162,39,0.1)' },
   Personal:   { color: '#F59E0B', bg: 'rgba(245,158,11,0.1)' },
 }
 

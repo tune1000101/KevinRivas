@@ -41,12 +41,12 @@ export default function MobileNav() {
             <>
               <Icon
                 size={20}
-                style={{ color: isActive ? '#6366F1' : '#6B7280', transition: 'color 0.15s' }}
+                style={{ color: isActive ? '#C9A227' : '#6B7280', transition: 'color 0.15s' }}
               />
               <span style={{
                 fontSize: '10px',
                 fontWeight: isActive ? 600 : 400,
-                color: isActive ? '#6366F1' : '#6B7280',
+                color: isActive ? '#C9A227' : '#6B7280',
                 lineHeight: '1',
                 transition: 'color 0.15s',
               }}>

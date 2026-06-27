@@ -2,9 +2,9 @@ import { CheckCircle, Calendar, Phone, FileText, MessageSquare, Star } from 'luc
 
 const typeConfig = {
   task:      { icon: CheckCircle,   color: '#10B981' },
-  booking:   { icon: Calendar,      color: '#6366F1' },
+  booking:   { icon: Calendar,      color: '#C9A227' },
   call:      { icon: Phone,         color: '#F59E0B' },
-  document:  { icon: FileText,      color: '#8B5CF6' },
+  document:  { icon: FileText,      color: '#C9A227' },
   message:   { icon: MessageSquare, color: '#06B6D4' },
   milestone: { icon: Star,          color: '#F59E0B' },
 }
@@ -85,7 +85,7 @@ export default function ActivityFeed({ items = demoActivity, profileName = 'Kevi
             width: '48px',
             height: '48px',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+            background: 'linear-gradient(135deg, #C9A227, #C9A227)',
             color: '#fff',
             fontSize: '18px',
             marginBottom: '12px',

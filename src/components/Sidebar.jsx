@@ -69,7 +69,7 @@ function NavItem({ to, icon: Icon, label, badge, onNavigate }) {
       onClick={onNavigate}
       className={({ isActive }) =>
         `flex items-center gap-3 rounded-lg text-sm font-medium transition-all duration-150 relative
-        ${isActive ? 'nav-active text-white bg-indigo-500/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'}`
+        ${isActive ? 'nav-active text-white bg-[rgba(201,162,39,0.1)]' : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'}`
       }
       style={{ padding: '12px 12px', lineHeight: '1.5' }}
     >
@@ -77,8 +77,8 @@ function NavItem({ to, icon: Icon, label, badge, onNavigate }) {
       <span className="flex-1 truncate">{label}</span>
       {badge && (
         <span style={{
-          background: 'rgba(99,102,241,0.15)',
-          color: '#6366F1',
+          background: 'rgba(201,162,39,0.15)',
+          color: '#C9A227',
           fontSize: '10px',
           padding: '2px 6px',
           borderRadius: '4px',
@@ -165,7 +165,7 @@ export default function Sidebar() {
         <div className="flex items-center gap-3" style={{ background: '#111118', borderRadius: '10px', padding: '12px' }}>
           <div className="flex items-center justify-center flex-shrink-0 font-semibold" style={{
             width: '32px', height: '32px', borderRadius: '50%',
-            background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
+            background: 'linear-gradient(135deg, #C9A227, #A8891F)',
             color: '#fff', fontSize: '14px',
           }}>
             {name.charAt(0).toUpperCase()}
